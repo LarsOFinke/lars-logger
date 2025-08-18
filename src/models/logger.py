@@ -2,10 +2,12 @@ from __future__ import annotations
 
 from .logger_config import LoggerConfig
 from ..services.path_service import PathService
+from ..services.file_service import FileService
 
 
 class Logger:
     path_service = PathService()
+    file_service = FileService()
 
     def __init__(self, name: str = "", config: LoggerConfig | None = None) -> None:
         self.name = name
@@ -25,5 +27,4 @@ class Logger:
             print(f"({level}) | {message}")
 
         if self.config.file_output:
-            with open(self.file_path, "a") as f:
-                f.write(f"({level}) | {message}\n")
+            self.file_service.append_message_to_file(self.file_path, message, level)

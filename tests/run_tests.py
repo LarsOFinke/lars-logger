@@ -1,23 +1,18 @@
-from model_tests import test_logger_model
-from service_tests import test_file_service
-from util_tests import test_get_entry_file
-
-
-def run_model_tests():
-    test_logger_model()
-
-
-def run_service_tests():
-    test_file_service()
-
-
-def run_util_tests():
-    test_get_entry_file()
+from model_tests import run_model_tests
+from service_tests import run_service_tests
+from util_tests import run_util_tests
 
 
 def run_tests():
+    print("Starting all tests...")
+
+    print("Starting model-tests...")
     run_model_tests()
+
+    print("Starting service-tests...")
     run_service_tests()
+
+    print("Starting util-tests...")
     run_util_tests()
 
 

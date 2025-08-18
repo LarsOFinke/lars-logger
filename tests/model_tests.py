@@ -7,8 +7,17 @@ def test_logger_model():
         print("Starting logger-model-tests...")
         logger = Logger()
         print(f"Logger - {logger}")
-        logger.info("Info-Test - NICHT SICHTBAR")
+        test_logger_functionality(logger, visible=False)
         print("Logger-model-Tests erfolgreich beendet.")
+    except Exception as e:
+        print(e)
+
+
+def test_logger_functionality(logger: Logger, visible=True):
+    try:
+        print("Starting logger-functionality-tests...")
+        logger.info(f"Info-Test - {"SICHTBAR" if visible else "NICHT SICHTBAR"}")
+        print("Logger-functionality-Tests erfolgreich beendet.")
     except Exception as e:
         print(e)
 
@@ -30,7 +39,7 @@ def test_custom_config():
         print(f"Custom-Config - {logger_config}")
         custom_logger = Logger(config=logger_config)
         print(f"Custom-Logger - {custom_logger}")
-        custom_logger.info("Info-Test - SICHTBAR")
+        test_logger_functionality(custom_logger)
         print("Custom-config-Tests erfolgreich beendet.")
     except Exception as e:
         print(e)

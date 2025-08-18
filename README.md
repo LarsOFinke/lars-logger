@@ -17,6 +17,5 @@ python.exe -m pip install --upgrade pip
 pip install -e .
 
 # Test Commands
-logger --help      # Typer Help-Menu
-logger-console     # Start Console-App
+logger-all-tests     # Alle Funktionalitäten und Einheiten testen
 ```

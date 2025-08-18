@@ -1,6 +1,6 @@
-from model_tests import run_model_tests
-from service_tests import run_service_tests
-from util_tests import run_util_tests
+from .model_tests import run_model_tests
+from .service_tests import run_service_tests
+from .util_tests import run_util_tests
 
 separator_length = 124
 

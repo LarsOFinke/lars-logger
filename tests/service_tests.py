@@ -6,6 +6,7 @@ def test_file_service():
         print("Starting file-service-tests...")
         file_service = FileService()
         print(f"File-Service - {file_service}")
+        print(f"Log-File-Path: {file_service.get_log_file_path("test")}")
         print("File-Service-Tests erfolgreich beendet.")
     except Exception as e:
         print(e)

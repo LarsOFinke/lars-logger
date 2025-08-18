@@ -11,11 +11,10 @@ dependencies = [
 ]
 
 [project.scripts]
-lifemgr = "apps.cli.main:app"              # Typer-CLI
-lifemgr-console = "apps.console.main:main" # interaktive Console (print/input)
+logger-all-tests = "tests.run_tests:run_tests"
 
 [tool.setuptools]
 package-dir = { "" = "." }
 
 [tool.setuptools.packages.find]
-include = ["apps*", "src*"] # nimmt nur Pakete mit __init__.py auf
+include = ["apps*", "src*", "tests*"] # nimmt nur Pakete mit __init__.py auf

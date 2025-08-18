@@ -17,3 +17,13 @@ class LoggerConfig:
         self.file_name: str = file_name
         self.file_type: str = file_type
         self.file_path: str = get_log_file_path(self.file_name)
+
+    def __repr__(self):
+        return (
+            f"Dev-Mode: {self.dev_mode} | "
+            f" Console-Output: {self.console_output} | "
+            f"File-Output: {self.file_output} | "
+            f"File-Name: {self.file_name} | "
+            f"File-Type: {self.file_type} | "
+            f"File-Path: {self.file_path}"
+        )

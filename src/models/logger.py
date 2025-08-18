@@ -9,3 +9,12 @@ class Logger:
         self.name = name
         self.config = LoggerConfig() if config is None else config
         self.file_service = FileService()
+        
+    def __repr__(self):
+        return (
+            f"Name: {self.name} | "
+            "\n"
+            f"Config -> {self.config} | "
+            "\n"
+            f"File-Service -> {self.file_service}"
+        )

@@ -1,4 +1,4 @@
-from ..src.models.logger import Logger
+from src.models.logger import Logger
 
 
 def test_logger_model():

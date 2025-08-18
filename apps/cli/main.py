@@ -1,6 +1,6 @@
 import typer
 
-app = typer.Typer(help="Life-Manager CLI")
+app = typer.Typer(help="Logger CLI")
 # app.add_typer(auth_app, name="auth")
 
 

@@ -1,4 +1,4 @@
-from ..utils.file_helpers import get_log_file_path
+from ..services.file_service import FileService
 
 
 class LoggerConfig:
@@ -16,7 +16,6 @@ class LoggerConfig:
         self.file_output: bool = file_output
         self.file_name: str = file_name
         self.file_type: str = file_type
-        self.file_path: str = get_log_file_path(self.file_name)
 
     def __repr__(self):
         return (
@@ -24,6 +23,5 @@ class LoggerConfig:
             f" Console-Output: {self.console_output} | "
             f"File-Output: {self.file_output} | "
             f"File-Name: {self.file_name} | "
-            f"File-Type: {self.file_type} | "
-            f"File-Path: {self.file_path}"
+            f"File-Type: {self.file_type}"
         )

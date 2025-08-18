@@ -5,7 +5,8 @@ def test_file_service():
     try:
         print("Starting file-service-tests...")
         file_service = FileService()
-        print(f"File-Service: {file_service}")
+        print(f"File-Service - {file_service}")
+        print("File-Service-Tests erfolgreich beendet.")
     except Exception as e:
         print(e)
 

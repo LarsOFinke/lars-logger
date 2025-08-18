@@ -20,3 +20,7 @@ class Logger:
             "\n"
             f"Path-Service -> {self.path_service}"
         )
+        
+    def info(self, message: str):
+        if self.config.console_output:
+            print(message)

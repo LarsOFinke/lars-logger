@@ -17,7 +17,7 @@ class LoggerConfig:
     def __repr__(self):
         return (
             f"Dev-Mode: {self.dev_mode} | "
-            f" Console-Output: {self.console_output} | "
+            f"Console-Output: {self.console_output} | "
             f"File-Output: {self.file_output} | "
             f"File-Name: {self.file_name} | "
             f"File-Type: {self.file_type}"

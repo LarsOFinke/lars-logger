@@ -2,7 +2,7 @@ import os
 import sys
 
 
-class FileService:
+class PathService:
     def __init__(self):
         self.entry_file = self.get_entry_file()
         self.entry_dir = os.path.dirname(self.entry_file)
@@ -66,4 +66,4 @@ class FileService:
         return os.path.join(log_dir, f"{file_name}.log")
 
     def __repr__(self):
-        return f"Entry-File: {self.entry_file}"
+        return f"Entry-File: {self.entry_file} | Entry-Dir: {self.entry_dir}"

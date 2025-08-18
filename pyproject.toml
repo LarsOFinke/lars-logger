@@ -7,7 +7,7 @@ name = "logger"
 version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
-  "typer>=0.12",        # CLI
+  "typer>=0.12", # CLI
 ]
 
 [project.scripts]
@@ -17,4 +17,4 @@ logger-all-tests = "tests.run_tests:run_tests"
 package-dir = { "" = "." }
 
 [tool.setuptools.packages.find]
-include = ["apps*", "src*", "tests*"] # nimmt nur Pakete mit __init__.py auf
+include = ["src*", "tests*"] # nimmt nur Pakete mit __init__.py auf

@@ -1,19 +1,19 @@
-from src.services.file_service import FileService
+from src.services.path_service import PathService
 
 
-def test_file_service():
+def test_path_service():
     try:
-        print("Starting file-service-tests...")
-        file_service = FileService()
-        print(f"File-Service - {file_service}")
-        print(f"Log-File-Path: {file_service.get_log_file_path("test")}")
-        print("File-Service-Tests erfolgreich beendet.")
+        print("Starting path-service-tests...")
+        path_service = PathService()
+        print(f"Path-Service - {path_service}")
+        print(f"Log-File-Path: {path_service.get_log_file_path("test")}")
+        print("Path-Service-Tests erfolgreich beendet.")
     except Exception as e:
         print(e)
 
 
 def run_service_tests():
     try:
-        test_file_service()
+        test_path_service()
     except Exception as e:
         print(e)

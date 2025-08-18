@@ -16,7 +16,7 @@ def test_logger_model():
 def test_logger_functionality(logger: Logger, visible=True):
     try:
         print("Starting logger-functionality-tests...")
-        logger.info(f"Info-Test - {"SICHTBAR" if visible else "NICHT SICHTBAR"}")
+        logger.log(f"Info-Test - {"SICHTBAR" if visible else "NICHT SICHTBAR"}")
         print("Logger-functionality-Tests erfolgreich beendet.")
     except Exception as e:
         print(e)

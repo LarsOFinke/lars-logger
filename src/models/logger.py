@@ -14,13 +14,16 @@ class Logger:
 
     def __repr__(self):
         return (
-            f"Name: {self.name} | "
-            "\n"
-            f"Config -> {self.config} | "
-            "\n"
+            f"Name: {self.name} | \n"
+            f"File-Path: {self.file_path} | \n"
+            f"Config -> {self.config} | \n"
             f"Path-Service -> {self.path_service}"
         )
-        
-    def info(self, message: str):
+
+    def log(self, message: str, level="info"):
         if self.config.console_output:
-            print(message)
+            print(f"({level}) | {message}")
+
+        if self.config.file_output:
+            with open(self.file_path, "a") as f:
+                f.write(f"({level}) | {message}\n")

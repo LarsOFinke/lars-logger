@@ -42,13 +42,17 @@ DEV_MODE = True
 JSON = False
 
 logger_service = LoggerService()
+# get_logger_config(dev_mode: bool, console_output: bool, file_output: bool, file_name: str, file_type: str,)
+# get_custom_logger(self, name: str, config: LoggerConfig)
+# get_test_logger()
 
 if DEV_MODE:
     logger = logger_service.get_dev_logger()
 elif JSON:
     logger = logger_service.get_json_logger()
 else:
-    logger = logger_service.get_logger()
+    logger = logger_service.get_default_logger()
+
 
 logger.log(message="Its a log!", level="info")  # "info" (default) / "warning" / "error"
 

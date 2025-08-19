@@ -20,6 +20,8 @@ pip install -e .
 logger-all-tests     # Alle Funktionalitäten und Einheiten testen
 ```
 
+`Setup`
+
 ```python
 from logger import Logger, LoggerConfig
 
@@ -34,6 +36,8 @@ cfg = LoggerConfig(
 logger = Logger(config=cfg)
 logger.log(message="Its a log!", level="info")  # "info" / "warning" / "error"
 ```
+
+`Useage`
 
 ```python
 from lars_logger.src.services.logger_service import LoggerService
@@ -60,4 +64,50 @@ logger.log(message="Its a log!", level="info")  # "info" (default) / "warning" /
 @logger.log_duration
 def test():
     print("Testing log_duration-functionality")
+```
+
+`Tests`
+
+```python
+from src.services.logger_service import test_logger as logger
+
+finished: int = 0
+successful: int = 0
+
+
+def finish_test(success=True):
+    global finished, successful
+    finished += 1
+    successful += 1 if success else 0
+
+
+def start_test(test: callable):
+    if test():
+        finish_test()
+    else:
+        finish_test(False)
+
+
+def test_logging():
+    try:
+        print("Starting logging-tests...")
+        print(logger)
+        logger.log("Test-Log entry - Info")
+        logger.log("Test-Log entry - Warning", "warning")
+        logger.log("Test-Log entry - Error", "error")
+        print("Logging-tests successful.")
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+
+@logger.log_duration
+def run_logger_tests():
+    try:
+        global finished, successful
+        start_test(test_logging)
+        return (finished, successful)
+    except Exception as e:
+        print(e)
 ```

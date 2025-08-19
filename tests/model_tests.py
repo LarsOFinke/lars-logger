@@ -59,7 +59,7 @@ def test_dev_file_configs():
         print("Starting dev-file-config-tests...")
 
         print("Starting Dev-Console-Text-File-test.")
-        dev_console_text_file_config = LoggerConfig(dev_mode=True, console_output=False)
+        dev_console_text_file_config = LoggerConfig(dev_mode=True, log_console=False)
         print(f"Dev-Console-Text-File-Config - {dev_console_text_file_config}")
         dev_console_text_file_logger = Logger(config=dev_console_text_file_config)
         print(f"Dev-Console-Text-File-Logger - {dev_console_text_file_logger}")
@@ -68,7 +68,7 @@ def test_dev_file_configs():
 
         print("Starting Dev-Console-Json-File-test.")
         dev_console_json_file_config = LoggerConfig(
-            dev_mode=True, console_output=False, file_type="json"
+            dev_mode=True, log_console=False, log_file_type="json"
         )
         print(f"Dev-Console-Json-File-Config - {dev_console_json_file_config}")
         dev_console_json_file_logger = Logger(config=dev_console_json_file_config)

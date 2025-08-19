@@ -22,7 +22,7 @@ def test_path_service() -> tuple[int]:
         print("Starting path-service-tests...")
         path_service = PathService()
         print(f"Path-Service - {path_service}")
-        print(f"Log-File-Path: {path_service.get_log_file_path("test")}")
+        print(f"Log-File-Path: {path_service.get_log_file_path("test", "json")}")
         print("Path-Service-Tests erfolgreich beendet.")
         return True
     except Exception as e:

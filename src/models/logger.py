@@ -21,31 +21,35 @@ class Logger:
         )
 
     def log(self, message: str, level="info"):
-        if self.config.console_output:
-            print(f"({level}) | {message}")
+        if self.config.dev_mode or level != "info":
+            if self.config.console_output:
+                print(f"({level}) | {message}")
 
-        if self.config.file_output and self.config.file_type == "text":
-            self.file_service.append_text_message_to_file(
-                file_path=self.file_path, level=level, message=message
-            )
-        elif self.config.file_output and self.config.file_type == "json":
-            self.file_service.append_json_message_to_file(
-                file_path=self.file_path, level=level, message=message
-            )
+            if self.config.file_output and self.config.file_type == "text":
+                self.file_service.append_text_message_to_file(
+                    file_path=self.file_path, level=level, message=message
+                )
+            elif self.config.file_output and self.config.file_type == "json":
+                self.file_service.append_json_message_to_file(
+                    file_path=self.file_path, level=level, message=message
+                )
 
     # Instance-decorator: @logger.log_duration
     def log_duration(self, func):
         @wraps(func)
         def wrapped(*args, **kwargs):
-            self.log(f"LOG-DURATION START | {func.__name__} started.")
-            start = time.perf_counter()
-            try:
-                return func(*args, **kwargs)  # just run it
-            finally:
-                elapsed = time.perf_counter() - start
-                self.log(
-                    f"LOG-DURATION END | {func.__name__} took {elapsed*1000:.2f} ms"
-                )
+            if self.config.dev_mode:
+                self.log(f"LOG-DURATION START | {func.__name__} started.")
+                start = time.perf_counter()
+                try:
+                    return func(*args, **kwargs)  # just run it
+                except Exception as e:
+                    self.log(e, "error")
+                finally:
+                    elapsed = time.perf_counter() - start
+                    self.log(
+                        f"LOG-DURATION END | {func.__name__} took {elapsed*1000:.2f} ms"
+                    )
 
         return wrapped
 

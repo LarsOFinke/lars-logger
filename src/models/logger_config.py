@@ -5,13 +5,13 @@ class LoggerConfig:
         dev_mode: bool = False,
         console_output: bool = False,
         file_output: bool = True,
-        file_name: str = "log",
+        file_name: str = "prod-log",
         file_type: str = "text",  # "text" / "json" / ...
     ):
         self.dev_mode: bool = dev_mode
         self.console_output: bool = console_output
         self.file_output: bool = file_output
-        self.file_name: str = file_name
+        self.file_name: str = file_name if not self.dev_mode else "dev-log"
         self.file_type: str = file_type
 
     def __repr__(self):

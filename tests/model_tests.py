@@ -54,15 +54,40 @@ def test_logger_config_model():
         return False
 
 
-def test_custom_config():
+def test_dev_file_configs():
+    try:
+        print("Starting dev-file-config-tests...")
+
+        print("Starting Dev-Console-Text-File-test.")
+        dev_console_text_file_config = LoggerConfig(dev_mode=True, console_output=False)
+        print(f"Dev-Console-Text-File-Config - {dev_console_text_file_config}")
+        dev_console_text_file_logger = Logger(config=dev_console_text_file_config)
+        print(f"Dev-Console-Text-File-Logger - {dev_console_text_file_logger}")
+        test_logger_functionality(dev_console_text_file_logger)
+        print("Dev-Console-Text-File-Config-Tests erfolgreich beendet.")
+
+        print("Starting Dev-Console-Json-File-test.")
+        dev_console_json_file_config = LoggerConfig(
+            dev_mode=True, console_output=False, file_type="json"
+        )
+        print(f"Dev-Console-Json-File-Config - {dev_console_json_file_config}")
+        dev_console_json_file_logger = Logger(config=dev_console_json_file_config)
+        print(f"Dev-Console-Json-File-Logger - {dev_console_json_file_logger}")
+        test_logger_functionality(dev_console_json_file_logger)
+        print("Dev-Console-Json-File-Config-Tests erfolgreich beendet.")
+
+        print("Dev-file-config-tests successful.")
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+
+def test_custom_configs():
     try:
         print("Starting custom-config-tests...")
-        logger_config = LoggerConfig(dev_mode=True, console_output=True)
-        print(f"Custom-Config - {logger_config}")
-        custom_logger = Logger(config=logger_config)
-        print(f"Custom-Logger - {custom_logger}")
-        test_logger_functionality(custom_logger)
-        print("Custom-config-Tests erfolgreich beendet.")
+        test_dev_file_configs()
+        print("Custom-config-tests successful.")
         return True
     except Exception as e:
         print(e)
@@ -76,7 +101,7 @@ def run_model_tests():
         print()
         start_test(test_logger_model)
         print()
-        start_test(test_custom_config)
+        start_test(test_custom_configs)
         return (finished, successful)
     except Exception as e:
         print(e)

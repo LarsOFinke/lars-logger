@@ -38,8 +38,18 @@ logger.log(message="Its a log!", level="info")  # "info" / "warning" / "error"
 ```python
 from lars_logger.src.services.logger_service import LoggerService
 
+DEV_MODE = True
+JSON = False
+
 logger_service = LoggerService()
-logger = logger_service.create_dev_logger() # create_test_logger()
+
+if DEV_MODE:
+    logger = logger_service.get_dev_logger()
+elif JSON:
+    logger = logger_service.get_json_logger()
+else:
+    logger = logger_service.get_logger()
+    
 logger.log(message="Its a log!", level="info")  # "info" / "warning" / "error"
 
 ```

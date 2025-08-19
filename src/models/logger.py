@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+import time
+
+from functools import wraps
+
 from .logger_config import LoggerConfig
 from ..services.path_service import PathService
 from ..services.file_service import FileService
@@ -28,6 +32,22 @@ class Logger:
             self.file_service.append_json_message_to_file(
                 file_path=self.file_path, level=level, message=message
             )
+
+    # Instance-decorator: @logger.log_duration
+    def log_duration(self, func):
+        @wraps(func)
+        def wrapped(*args, **kwargs):
+            self.log(f"LOG-DURATION START | {func.__name__} started.")
+            start = time.perf_counter()
+            try:
+                return func(*args, **kwargs)  # just run it
+            finally:
+                elapsed = time.perf_counter() - start
+                self.log(
+                    f"LOG-DURATION END | {func.__name__} took {elapsed*1000:.2f} ms"
+                )
+
+        return wrapped
 
     def __repr__(self):
         return (

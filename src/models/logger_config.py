@@ -6,7 +6,7 @@ class LoggerConfig:
         console_output: bool = False,
         file_output: bool = True,
         file_name: str = "log",
-        file_type: str = "text",
+        file_type: str = "text",  # "text" / "json" / ...
     ):
         self.dev_mode: bool = dev_mode
         self.console_output: bool = console_output

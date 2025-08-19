@@ -63,7 +63,7 @@ class PathService:
         base = self._prefer_base_dir()
         log_dir = os.path.join(base, "logs")
         os.makedirs(log_dir, exist_ok=True)
-        return os.path.join(log_dir, f"{file_name}.log")
+        return os.path.join(log_dir, f"{file_name}")
 
     def __repr__(self):
         return f"Entry-File: {self.entry_file} | Entry-Dir: {self.entry_dir}"

@@ -12,7 +12,7 @@ class Logger:
     def __init__(self, name: str = "", config: LoggerConfig | None = None) -> None:
         self.name = name
         self.config = LoggerConfig() if config is None else config
-        self.file_path: str = self.path_service.get_log_file_path(self.config.file_name)
+        self._set_file_path()
 
     def __repr__(self):
         return (
@@ -23,9 +23,20 @@ class Logger:
             f"File-Service -> {self.file_service}"
         )
 
+    def _set_file_path(self):
+        file_extension: str = ".log" if self.config.file_type != "json" else ".json"
+        file_name: str = self.config.file_name + file_extension
+        self.file_path: str = self.path_service.get_log_file_path(file_name)
+
     def log(self, message: str, level="info"):
         if self.config.console_output:
             print(f"({level}) | {message}")
 
-        if self.config.file_output:
-            self.file_service.append_message_to_file(self.file_path, message, level)
+        if self.config.file_output and self.config.file_type == "text":
+            self.file_service.append_text_message_to_file(
+                file_path=self.file_path, level=level, message=message
+            )
+        elif self.config.file_output and self.config.file_type == "json":
+            self.file_service.append_json_message_to_file(
+                file_path=self.file_path, level=level, message=message
+            )

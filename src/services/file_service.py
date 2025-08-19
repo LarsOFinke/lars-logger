@@ -33,7 +33,7 @@ class FileService:
                     record, ensure_ascii=False, separators=(",", ":"), default=str
                 )
             )
-            f.write("\n")
+            f.write(",\n")
 
     def __repr__(self):
         return "File-Service ist initialisert."

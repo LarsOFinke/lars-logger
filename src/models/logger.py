@@ -19,7 +19,8 @@ class Logger:
             f"Name: {self.name} | \n"
             f"File-Path: {self.file_path} | \n"
             f"Config -> {self.config} | \n"
-            f"Path-Service -> {self.path_service}"
+            f"Path-Service -> {self.path_service} | \n"
+            f"File-Service -> {self.file_service}"
         )
 
     def log(self, message: str, level="info"):

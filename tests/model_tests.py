@@ -1,6 +1,22 @@
 from src.models.logger_config import LoggerConfig
 from src.models.logger import Logger
 
+finished: int = 0
+successful: int = 0
+
+
+def finish_test(success=True):
+    global finished, successful
+    finished += 1
+    successful += 1 if success else 0
+
+
+def start_test(test: callable):
+    if test():
+        finish_test()
+    else:
+        finish_test(False)
+
 
 def test_logger_model():
     try:
@@ -9,8 +25,10 @@ def test_logger_model():
         print(f"Logger - {logger}")
         test_logger_functionality(logger, visible=False)
         print("Logger-model-Tests erfolgreich beendet.")
+        return True
     except Exception as e:
         print(e)
+        return False
 
 
 def test_logger_functionality(logger: Logger, visible=True):
@@ -18,8 +36,10 @@ def test_logger_functionality(logger: Logger, visible=True):
         print("Starting logger-functionality-tests...")
         logger.log(f"Info-Test - {"SICHTBAR" if visible else "NICHT SICHTBAR"}")
         print("Logger-functionality-Tests erfolgreich beendet.")
+        return True
     except Exception as e:
         print(e)
+        return False
 
 
 def test_logger_config_model():
@@ -28,8 +48,10 @@ def test_logger_config_model():
         logger_config = LoggerConfig()
         print(f"Logger-Config - {logger_config}")
         print("Logger-Config-model-Tests erfolgreich beendet.")
+        return True
     except Exception as e:
         print(e)
+        return False
 
 
 def test_custom_config():
@@ -41,16 +63,20 @@ def test_custom_config():
         print(f"Custom-Logger - {custom_logger}")
         test_logger_functionality(custom_logger)
         print("Custom-config-Tests erfolgreich beendet.")
+        return True
     except Exception as e:
         print(e)
+        return False
 
 
 def run_model_tests():
     try:
-        test_logger_config_model()
+        global finished, successful
+        start_test(test_logger_config_model)
         print()
-        test_logger_model()
+        start_test(test_logger_model)
         print()
-        test_custom_config()
+        start_test(test_custom_config)
+        return (finished, successful)
     except Exception as e:
         print(e)

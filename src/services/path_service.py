@@ -59,11 +59,12 @@ class PathService:
 
     # --- Public API ----------------------------------------------------------
 
-    def get_log_file_path(self, file_name: str) -> str:
+    def get_log_file_path(self, file_name: str, file_type: str) -> str:
         base = self._prefer_base_dir()
         log_dir = os.path.join(base, "logs")
         os.makedirs(log_dir, exist_ok=True)
-        return os.path.join(log_dir, f"{file_name}")
+        file_extension: str = ".log" if file_type != "json" else ".json"
+        return os.path.join(log_dir, f"{file_name}{file_extension}")
 
     def __repr__(self):
         return f"Entry-File: {self.entry_file} | Entry-Dir: {self.entry_dir}"

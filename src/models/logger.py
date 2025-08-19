@@ -13,7 +13,7 @@ class Logger:
     path_service = PathService()
     file_service = FileService()
 
-    def __init__(self, name: str = "", config: LoggerConfig | None = None) -> None:
+    def __init__(self, name: str = "Logger", config: LoggerConfig | None = None) -> None:
         self.name = name
         self.config = LoggerConfig() if config is None else config
         self.file_path: str = self.path_service.get_log_file_path(

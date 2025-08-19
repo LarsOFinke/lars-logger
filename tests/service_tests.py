@@ -1,3 +1,4 @@
+from src.services.logger_service import LoggerService, LoggerConfig
 from src.services.path_service import PathService
 
 finished: int = 0
@@ -17,7 +18,35 @@ def start_test(test: callable):
         finish_test(False)
 
 
-def test_path_service() -> tuple[int]:
+def test_logger_service():
+    try:
+        print("Starting logger-service-tests...")
+        logger_service = LoggerService()
+        default_logger = logger_service.get_default_logger()
+        print(default_logger)
+        custom_config = LoggerConfig(
+            dev_mode=True,
+            log_level="info",
+            log_console=True,
+            log_file=False,
+            log_file_name="custom-log-should-not-appear",
+        )
+        custom_logger = logger_service.get_custom_logger(
+            "Test-Custom-Logger", custom_config
+        )
+        print(custom_logger)
+        dev_logger = logger_service.get_dev_logger()
+        print(dev_logger)
+        test_logger = logger_service.get_test_logger()
+        print(test_logger)
+        print("Logger-Service-Tests erfolgreich beendet.")
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+
+def test_path_service():
     try:
         print("Starting path-service-tests...")
         path_service = PathService()

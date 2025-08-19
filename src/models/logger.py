@@ -17,19 +17,19 @@ class Logger:
         self.name = name
         self.config = LoggerConfig() if config is None else config
         self.file_path: str = self.path_service.get_log_file_path(
-            self.config.file_name, self.config.file_type
+            self.config.log_file_name, self.config.log_file_type
         )
 
     def log(self, message: str, level="info"):
         if self.config.dev_mode or level != "info":
-            if self.config.console_output:
+            if self.config.log_console:
                 print(f"({level}) | {message}")
 
-            if self.config.file_output and self.config.file_type == "text":
+            if self.config.log_file and self.config.log_file_type == "text":
                 self.file_service.append_text_message_to_file(
                     file_path=self.file_path, level=level, message=message
                 )
-            elif self.config.file_output and self.config.file_type == "json":
+            elif self.config.log_file and self.config.log_file_type == "json":
                 self.file_service.append_json_message_to_file(
                     file_path=self.file_path, level=level, message=message
                 )

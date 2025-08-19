@@ -9,12 +9,20 @@ class LoggerService:
     def get_logger_config(
         self,
         dev_mode: bool,
-        console_output: bool,
-        file_output: bool,
-        file_name: str,
-        file_type: str,
+        log_level: str,
+        log_console: bool,
+        log_file: bool,
+        log_file_name: str,
+        log_file_type: str,
     ):
-        return LoggerConfig(dev_mode, console_output, file_output, file_name, file_type)
+        return LoggerConfig(
+            dev_mode=dev_mode,
+            log_level=log_level,
+            log_console=log_console,
+            log_file=log_file,
+            log_file_name=log_file_name,
+            log_file_type=log_file_type,
+        )
 
     def get_default_logger(self, name="Logger"):
         return Logger(name=name)
@@ -25,27 +33,29 @@ class LoggerService:
     def get_json_logger(self, name="Logger"):
         test_cfg = LoggerConfig(
             dev_mode=False,
-            console_output=False,
-            file_output=True,
-            file_type="json",
+            log_console=False,
+            log_file=True,
+            log_file_name="log",
+            log_file_type="json",
         )
         return Logger(name=name, config=test_cfg)
 
     def get_dev_logger(self):
         dev_cfg = LoggerConfig(
             dev_mode=True,
-            console_output=True,
-            file_output=True,
-            file_type="text",
+            log_console=True,
+            log_file=True,
+            log_file_name="dev-log",
+            log_file_type="text",
         )
         return Logger(name="Dev-Logger", config=dev_cfg)
 
     def get_test_logger(self):
         dev_cfg = LoggerConfig(
             dev_mode=True,
-            console_output=True,
-            file_output=True,
-            file_name="test-log",
-            file_type="text",
+            log_console=True,
+            log_file=True,
+            log_file_name="test-log",
+            log_file_type="text",
         )
         return Logger(name="Test-Logger", config=dev_cfg)

@@ -9,19 +9,20 @@ class FileService:
 
     def append_text_message_to_file(self, file_path: str, message: str, level: str):
         with open(file_path, "a") as f:
-            f.write(f"({level}) | {message}\n")
+            f.write(
+                f"({level}) | {datetime.strftime(datetime.now(), "%d/%m/%Y, %H:%M:%S")} | {message}\n"
+            )
 
     def append_json_message_to_file(
         self, file_path: str, level: str, message: str, **extra
     ) -> None:
         record = {
-            "ts": datetime.now(timezone.utc).isoformat(),
+            "ts": datetime.strftime(datetime.now(), "%d/%m/%Y, %H:%M:%S"),
             "level": level,
             "message": message,
             **extra,  # optional: weitere Felder
         }
 
-        # NDJSON: eine JSON-Zeile pro Logeintrag
         with open(file_path, "a", encoding="utf-8") as f:
             f.write(
                 json.dumps(

@@ -7,17 +7,21 @@ class FileService:
     def __init__(self):
         pass
 
+    def get_current_time(self) -> str:
+        current_time: str = datetime.strftime(datetime.now(), "%d/%m/%Y, %H:%M:%S")
+        return current_time
+
     def append_text_message_to_file(self, file_path: str, message: str, level: str):
+        current_time = self.get_current_time()
         with open(file_path, "a") as f:
-            f.write(
-                f"({level}) | {datetime.strftime(datetime.now(), "%d/%m/%Y, %H:%M:%S")} | {message}\n"
-            )
+            f.write(f"({level}) | {current_time} | {message}\n")
 
     def append_json_message_to_file(
         self, file_path: str, level: str, message: str, **extra
     ) -> None:
+        current_time = self.get_current_time()
         record = {
-            "ts": datetime.strftime(datetime.now(), "%d/%m/%Y, %H:%M:%S"),
+            "ts": current_time,
             "level": level,
             "message": message,
             **extra,  # optional: weitere Felder

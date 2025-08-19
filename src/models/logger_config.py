@@ -3,7 +3,7 @@ class LoggerConfig:
     def __init__(
         self,
         dev_mode: bool = False,
-        log_level: str = "info",  # "info" / "warning" / "error"
+        log_level: str = "error",  # "info" / "warning" / "error"
         log_console: bool = False,
         log_file: bool = True,
         log_file_name: str = "prod-log",

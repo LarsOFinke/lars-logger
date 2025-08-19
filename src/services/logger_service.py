@@ -33,6 +33,7 @@ class LoggerService:
     def get_json_logger(self, name="Logger"):
         test_cfg = LoggerConfig(
             dev_mode=False,
+            log_level="info",
             log_console=False,
             log_file=True,
             log_file_name="log",
@@ -43,6 +44,7 @@ class LoggerService:
     def get_dev_logger(self):
         dev_cfg = LoggerConfig(
             dev_mode=True,
+            log_level="info",
             log_console=True,
             log_file=True,
             log_file_name="dev-log",
@@ -53,6 +55,7 @@ class LoggerService:
     def get_test_logger(self):
         dev_cfg = LoggerConfig(
             dev_mode=True,
+            log_level="info",
             log_console=True,
             log_file=True,
             log_file_name="test-log",

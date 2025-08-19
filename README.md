@@ -49,7 +49,11 @@ elif JSON:
     logger = logger_service.get_json_logger()
 else:
     logger = logger_service.get_logger()
-    
-logger.log(message="Its a log!", level="info")  # "info" / "warning" / "error"
 
+logger.log(message="Its a log!", level="info")  # "info" (default) / "warning" / "error"
+
+
+@logger.log_duration
+def test():
+    print("Testing log_duration-functionality")
 ```

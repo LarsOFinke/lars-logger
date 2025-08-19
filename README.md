@@ -19,3 +19,12 @@ pip install -e .
 # Test Commands
 logger-all-tests     # Alle Funktionalitäten und Einheiten testen
 ```
+
+```python
+from logger import Logger, LoggerConfig
+
+cfg = LoggerConfig(dev_mode=True, console_output=True)
+
+logger = Logger(config=cfg)
+logger.log(message="Its a log!", level="info")  # "info" / "warning" / "error"
+```

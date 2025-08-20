@@ -23,7 +23,10 @@ class Logger:
         )
 
     def log(self, message: str, level="info"):
-        if self.config.dev_mode or level in self.config.log_level_includes[level]:
+        if (
+            self.config.dev_mode
+            or level in self.config.log_level_includes[self.config.log_level]
+        ):
             if self.config.log_console:
                 print(f"({level}) | {message}")
 

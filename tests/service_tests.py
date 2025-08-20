@@ -25,8 +25,10 @@ def test_logger_service():
         print("Starting logger-service-tests...")
         logger_service = LoggerService()
         default_logger = logger_service.get_default_logger()
-        print(default_logger)
-        if not test_logger_functionality(default_logger, visible=False):
+        print("Default-Logger:", default_logger)
+        if not test_logger_functionality(
+            default_logger, info_visible=False, warning_visible=False
+        ):
             return False
 
         custom_config = LoggerConfig(
@@ -45,6 +47,9 @@ def test_logger_service():
 
         dev_logger = logger_service.get_dev_logger()
         print(dev_logger)
+        if not test_logger_functionality(dev_logger):
+            return False
+
         test_logger = logger_service.get_test_logger()
         print(test_logger)
         if not test_logger_functionality(test_logger):
@@ -73,6 +78,7 @@ def run_service_tests():
     try:
         global finished, successful
         start_test(test_path_service)
+        start_test(test_logger_service)
         return (finished, successful)
     except Exception as e:
         print(e)

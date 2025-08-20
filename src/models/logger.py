@@ -30,14 +30,16 @@ class Logger:
             if self.config.log_console:
                 print(f"({level}) | {message}")
 
-            if self.config.log_file and self.config.log_file_type == "text":
-                self.file_service.append_text_message_to_file(
-                    file_path=self.file_path, level=level, message=message
-                )
-            elif self.config.log_file and self.config.log_file_type == "json":
-                self.file_service.append_json_message_to_file(
-                    file_path=self.file_path, level=level, message=message
-                )
+            if self.config.log_file:
+                match self.config.log_file_type:
+                    case "text":
+                        self.file_service.append_text_message_to_file(
+                            file_path=self.file_path, level=level, message=message
+                        )
+                    case "json":
+                        self.file_service.append_json_message_to_file(
+                            file_path=self.file_path, level=level, message=message
+                        )
 
     # Instance-decorator: @logger.log_duration
     def log_duration(self, func):

@@ -22,8 +22,15 @@ class Logger:
             self.config.log_file_name, self.config.log_file_type
         )
 
-    def log(self, message: str, level="info"):
+    def _check_log_level(self, level: str):
+        if self.config.dev_mode:
+            return True
         if level in self.config.log_level_includes[self.config.log_level]:
+            return True
+        return False
+
+    def log(self, message: str, level="info"):
+        if self._check_log_level(level):
             if self.config.log_console:
                 print(f"({level}) | {message}")
 
@@ -42,26 +49,29 @@ class Logger:
     def log_duration(self, func):
         @wraps(func)
         def wrapped(*args, **kwargs):
-            if self.config.dev_mode:
-                self.log(f"LOG-DURATION START | {func.__name__} started.")
-                start = time.perf_counter()
-                try:
-                    return func(*args, **kwargs)  # just run it
-                except Exception as e:
-                    self.log(e, "error")
-                finally:
-                    elapsed = time.perf_counter() - start
-                    self.log(
-                        f"LOG-DURATION END | {func.__name__} took {elapsed*1000:.2f} ms"
-                    )
+            if not self.config.dev_mode:
+                # PROD: run the function, no timing logs
+                return func(*args, **kwargs)
+
+            # DEV: log start + duration
+            self.log(f"{func.__name__} started.", "duration")
+            start = time.perf_counter()
+            try:
+                return func(*args, **kwargs)
+            except Exception as e:
+                self.log(str(e), "error")  # ensure string
+                raise
+            finally:
+                elapsed = time.perf_counter() - start
+                self.log(f"{func.__name__} took {elapsed*1000:.2f} ms", "duration")
 
         return wrapped
 
     def __repr__(self):
         return (
-            f"Logger-Name: {self.name} | \n"
-            f"File-Path: {self.file_path} | \n"
-            f"Config -> {self.config} | \n"
-            f"Path-Service -> {self.path_service} | \n"
+            f"Logger-Name: {self.name} | "
+            f"File-Path: {self.file_path} | "
+            f"Config -> {self.config} | "
+            f"Path-Service -> {self.path_service} | "
             f"File-Service -> {self.file_service}"
         )

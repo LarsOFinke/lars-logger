@@ -13,7 +13,7 @@ class FileService:
 
     def append_text_message_to_file(self, file_path: str, message: str, level: str):
         current_time = self.get_current_time()
-        with open(file_path, "a") as f:
+        with open(file_path, "a", encoding="utf-8") as f:
             f.write(f"({level}) | {current_time} | {message}\n")
 
     def append_json_message_to_file(

@@ -15,9 +15,6 @@ python.exe -m pip install --upgrade pip
 
 # Dependencies
 pip install -e .
-
-# Test Commands
-logger-all-tests     # Alle Funktionalitäten und Einheiten testen
 ```
 
 `Setup`

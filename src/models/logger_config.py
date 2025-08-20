@@ -8,13 +8,30 @@ class LoggerConfig:
         log_file: bool = True,
         log_file_name: str = "prod-log",
         log_file_type: str = "text",  # "text" / "json" / ...
-    ):
+    ) -> None:
         self.dev_mode: bool = dev_mode
         self.log_level: str = log_level
         self.log_console: bool = log_console
         self.log_file: bool = log_file
         self.log_file_name: str = log_file_name
         self.log_file_type: str = log_file_type
+        self.log_level_includes: dict[str : list[str]] = self._get_log_level_includes()
+
+    def _get_log_level_includes(self) -> dict[str : list[str]]:
+        return {
+            "info": [
+                "info",
+                "warning",
+                "error",
+            ],
+            "warning": [
+                "warning",
+                "error",
+            ],
+            "error": [
+                "error",
+            ],
+        }
 
     def __repr__(self):
         return (

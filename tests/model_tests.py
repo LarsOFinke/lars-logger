@@ -23,7 +23,7 @@ def test_logger_model():
         print("Starting logger-model-tests...")
         logger = Logger()
         print(f"Logger - {logger}")
-        test_logger_functionality(logger, visible=False)
+        test_logger_functionality(logger)
         print("Logger-model-Tests erfolgreich beendet.")
         return True
     except Exception as e:
